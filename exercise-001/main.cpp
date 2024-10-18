@@ -1,5 +1,8 @@
 #include <fmt/chrono.h>
 #include <fmt/format.h>
+#include <vector>
+#include <random>
+#include <iostream>
 
 #include "CLI/CLI.hpp"
 #include "config.h"
@@ -31,15 +34,40 @@ auto main(int argc, char **argv) -> int
     /* INSERT YOUR CODE HERE */
 
     CLI::App app{"Random number generator"};
-
     int count = 20;
+
+try
+{
     app.add_option("-c,--count", count, "Number of random values")->default_val(20);
 
-    CLI11_PARSE(app, argc, argv);
-    
+    app.parse(argc, argv);
+     
+}
+catch (const CLI::ParseError &e)
+{
+    return app.exit(e);
+}
+
     // Der Wert von count wird hier verwendet
     std::cout << "Count: " << count << std::endl;
 
+    std::vector<int> values(count);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(1, 100);
+
+    for (auto& value : values) {
+        value = dist(gen);
+    }
+
+    // Zufallswerte ausgeben
+    for (const auto& value : values) {
+        std::cout << value << " ";
+    }
+    std::cout << std::endl;
+
+
+    
     return 0; /* exit gracefully*/
 }
 
