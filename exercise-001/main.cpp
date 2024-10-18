@@ -1,5 +1,6 @@
 #include <fmt/chrono.h>
 #include <fmt/format.h>
+#include <fmt/core.h>
 #include <vector>
 #include <random>
 #include <iostream>
@@ -66,9 +67,18 @@ catch (const CLI::ParseError &e)
     }
     std::cout << std::endl;
 
-
     
+    print_vector(values);
+
+
     return 0; /* exit gracefully*/
 }
 
+    void print_vector(const std::vector<int>& values) {
+    fmt::print("Random values: [");
+    for (const auto& value : values) {
+        fmt::print("{} ", value);
+    }
+    fmt::print("]\n");
+}
 
