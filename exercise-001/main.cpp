@@ -30,5 +30,17 @@ auto main(int argc, char **argv) -> int
 
     /* INSERT YOUR CODE HERE */
 
+    CLI::App app{"Random number generator"};
+
+    int count = 20;
+    app.add_option("-c,--count", count, "Number of random values")->default_val(20);
+
+    CLI11_PARSE(app, argc, argv);
+    
+    // Der Wert von count wird hier verwendet
+    std::cout << "Count: " << count << std::endl;
+
     return 0; /* exit gracefully*/
 }
+
+
