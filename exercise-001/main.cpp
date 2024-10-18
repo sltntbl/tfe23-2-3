@@ -9,14 +9,6 @@
 #include "CLI/CLI.hpp"
 #include "config.h"
 
-void sort_and_print(std::vector<int>& values) {
-    std::sort(values.begin(), values.end());
-    fmt::print("Sorted values: [");
-    for (const auto& value : values) {
-        fmt::print("{} ", value);
-    }
-    fmt::print("]\n");
-}
     
 auto main(int argc, char **argv) -> int
 {
@@ -92,3 +84,23 @@ catch (const CLI::ParseError &e)
     fmt::print("]\n");
 }
 
+
+void sort_and_print(std::vector<int>& values) {
+    std::sort(values.begin(), values.end());
+    fmt::print("Sorted values: [");
+    for (const auto& value : values) {
+        fmt::print("{} ", value);
+    }
+    fmt::print("]\n");
+}
+
+void sort_with_timing(std::vector<int>& values) {
+    auto start = std::chrono::system_clock::now();
+    
+    std::sort(values.begin(), values.end());
+    
+    auto end = std::chrono::system_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    
+    fmt::print("Sorting took {} ms\n", elapsed.count());
+}
