@@ -4,10 +4,20 @@
 #include <vector>
 #include <random>
 #include <iostream>
+#include <algorithm>
 
 #include "CLI/CLI.hpp"
 #include "config.h"
 
+void sort_and_print(std::vector<int>& values) {
+    std::sort(values.begin(), values.end());
+    fmt::print("Sorted values: [");
+    for (const auto& value : values) {
+        fmt::print("{} ", value);
+    }
+    fmt::print("]\n");
+}
+    
 auto main(int argc, char **argv) -> int
 {
     /**
